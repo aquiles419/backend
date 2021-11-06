@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script>
+        $(document).ready(() => {
+            fetch('http://localhost:4000/produtos')
+                .then((response) => {
+                    return response.json();
+                })
+                .then((response) => {
+                    console.log(response)
+                    let elements = `<table id="ready-table" class="display" style="width:100%">`;
+                    elements += "<thead><tr>";
+                    
+                    Object.keys(response[0]).forEach((colName) => elements += "<th>"  + colName + "</th>" );
+                    elements += "</tr></thead>";
+                    elements += "<tbody>";
+                    response.forEach((res) => {
+                       elements += "<tr>";
+                       Object.keys(res).forEach((colName) => elements += "<td>"  + res[colName] + "</td>" );
+                       elements += "</tr>";
+                    });
+                    elements += "</tbody></table>";
+                    $('#table-container').html(elements);
+                    $('#ready-table').DataTable();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
+        </script>
+    </head>
+    <body>
+        <div id="table-container"></div>
+
+    </body>
+</html>
