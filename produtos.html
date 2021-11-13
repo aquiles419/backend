@@ -3,37 +3,105 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="styleProdutos.css">
         <script>
+
+
+
         $(document).ready(() => {
-            fetch('http://localhost:4000/produtos')
-                .then((response) => {
-                    return response.json();
-                })
-                .then((response) => {
-                    console.log(response)
-                    let elements = `<table id="ready-table" class="display" style="width:100%">`;
-                    elements += "<thead><tr>";
+            
+
+            $('#example').DataTable( {
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": {url:"http://localhost:4000/produtos"},
+                    "columns": [
+                     { "data": "ean" },
+                     { "data": "DESCRICAO"},
+                     { "data": "DESCRICAO_REGRA"},
+                     { "data": "IMPORTADO"},
+                     { "data": "NCM"},
+                     { "data": "NCMEX"},
+                     { "data": "SEGMENTO"},
+                     { "data": "MERCANTIL"},
+                     { "data": "IPI"},
+                     { "data": "PIS"},
+                     { "data": "COFINS"},
+                     { "data": "PISCOFINS_SITUACAO"},
+                     { "data": "PISCOFINS_CST_ENTRADA"},
+                     { "data": "PISCOFINS_ST_SAIDA"},
+                     { "data": "PISCOFINS_NATUREZAREC"},
+                     { "data": "ALIQUOTA_EFETIVA"},
+                     { "data": "ICMS_ENTRADA"},
+                     { "data": "ICMS_FCP"},
+                     { "data": "ICMS_SAIDA_PERCENTUAL_REDUCAO"},
+                     { "data": "ICMS_SAIDA_ALIQUOTACHEIA"},
+                     { "data": "ICMS_SAIDA_CST"},
+                     { "data": "ICMS_SAIDA_CSOSN"},
+                     { "data": "ICMS_SAIDA_SUBLIMITE"},
+                     { "data": "ICMS_FCP_SUBLIMITE"},
+                     { "data": "ICMS_SAIDA_CST_SUBLIMITE"},
+                     { "data": "CFOP_VENDA"},
+                     { "data": "CODIGO_BENEFICIO"},
+                     { "data": "DESONERACAO_MOTIVO"},
+                     { "data": "DESONERACAO_ICMS"},
+                     { "data": "DESONERACAO_FCP"},
+                     { "data": "DESONERACAO_DESCONTAR_ICMS"},
+                     { "data": "DESONERACAO_DESCONTAR_PISCOFINS"},
+                     { "data": "LISTA"},
+                    ]
+                     
                     
-                    Object.keys(response[0]).forEach((colName) => elements += "<th>"  + colName + "</th>" );
-                    elements += "</tr></thead>";
-                    elements += "<tbody>";
-                    response.forEach((res) => {
-                       elements += "<tr>";
-                       Object.keys(res).forEach((colName) => elements += "<td>"  + res[colName] + "</td>" );
-                       elements += "</tr>";
-                    });
-                    elements += "</tbody></table>";
-                    $('#table-container').html(elements);
-                    $('#ready-table').DataTable();
-                })
-                .catch((error) => {
-                    console.log(error);
                 });
+
+
+            
+
         });
         </script>
     </head>
     <body>
-        <div id="table-container"></div>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>EAN</th>
+                    <th>Descrição</th>
+                    <th>Descrição Regra</th>
+                    <th>Importado</th>
+                    <th>NCM</th>
+                    <th>NCMEX</th>
+                    <th>Segmento</th>
+                    <th>Mercantil</th>
+                    <th>IPI</th>
+                    <th>PIS</th>
+                    <th>COFINS</th>
+                    <th>PIS COFINS Situação</th>
+                    <th>PIS COFINS CTS Entrada</th>
+                    <th>PIS COFINS ST Saída</th>
+                    <th>PIS COFINS Natureza REC</th>
+                    <th>Alíquota Efetiva</th>
+                    <th>ICMS Entrada</th>
+                    <th>ICMS FCP</th>
+                    <th>ICMS Saída Percentual Redução</th>
+                    <th>ICMS Saída Alíquota Cheia</th>
+                    <th>ICMS Saída CST</th>
+                    <th>ICMS Saída CSOSN</th>
+                    <th>ICMS Saída Sublimite</th>
+                    <th>ICMS FCP Sublimite</th>
+                    <th>ICMS Saída CST Sublimte</th>
+                    <th>CFOP Venda</th>
+                    <th>Código Beneficio</th>
+                    <th>Desoneração Motivo</th>
+                    <th>Desoneração ICMS</th>
+                    <th>Desoneração FCP</th>
+                    <th>Desoneração Descontar ICMS</th>
+                    <th>Desoneração Descontar PIS COFINS</th>
+                    <th>Lista</th>
+                    
+                </tr>
+            </thead>
+           
+        </table>
 
     </body>
 </html>
