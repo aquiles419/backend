@@ -4,7 +4,7 @@ var knex = require('knex')({
         host: process.env.RDS_HOSTNAME || 'localhost',
         user: process.env.RDS_USERNAME || 'admin',
         password: process.env.RDS_PASSWORD || '',
-        database: process.env.RDS_DB_NAME || 'confisped'
+        database: 'confisped' || process.env.RDS_DB_NAME
     }
 });
 module.exports = knex
